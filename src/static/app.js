@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ? details.participants
               .map(
                 (email) => `
-                  <div class="participant-row">
+                  <li class="participant-item">
                     <span class="participant-email">${email}</span>
                     <button
                       class="delete-participant"
@@ -35,11 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     >
                       🗑️
                     </button>
-                  </div>
+                  </li>
                 `
               )
               .join("")
-          : "<div class=\"participant-empty\">No participants yet</div>";
+          : "<li class=\"participant-empty\">No participants yet</li>";
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
@@ -48,9 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
           <div class="participants-box">
             <p class="participants-title"><strong>Participants</strong></p>
-            <div class="participants-list">
+            <ul class="participants-list">
               ${participantsList}
-            </div>
+            </ul>
           </div>
         `;
 
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.classList.add("hidden");
       }, 5000);
 
-      fetchActivities();
+      await fetchActivities();
     } catch (error) {
       messageDiv.textContent = error.message || "Failed to unregister participant.";
       messageDiv.className = "error";
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.classList.add("hidden");
       }, 5000);
 
-      fetchActivities();
+      await fetchActivities();
     } catch (error) {
       messageDiv.textContent = "Failed to sign up. Please try again.";
       messageDiv.className = "error";
